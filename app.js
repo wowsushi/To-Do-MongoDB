@@ -22,7 +22,10 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', ( req,res ) => {
-  return res.render('index')
+  Todo.find((error, todos) => {
+    if (error) return console.log(error)
+    return res.render('index', {todos: todos})
+  })
 })
 
 app.get('/todos', ( req,res ) => {
