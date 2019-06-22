@@ -1,7 +1,11 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 const app = express()
 const port = 3000
+
+app.engine('handlebars', exphbs({ defaultLayouts: 'main' }))
+app.set('view engine', 'handlebars')
 
 mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true })
 
@@ -18,7 +22,7 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', ( req,res ) => {
-  res.send('hello')
+  return res.render('index')
 })
 
 app.get('/todos', ( req,res ) => {
