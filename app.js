@@ -24,7 +24,9 @@ db.once('open', () => {
 const Todo = require('./models/todo')
 
 app.get('/', ( req,res ) => {
-  Todo.find((error, todos) => {
+  Todo.find()
+  .sort({ name: 'asc' })
+  .exec((error, todos) => {
     if (error) return console.log(error)
     return res.render('index', {todos: todos})
   })
