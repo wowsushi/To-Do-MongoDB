@@ -54,15 +54,25 @@ app.get('/todos/:id', ( req,res ) => {
     if (err) return console.log(err)
     return res.render('detail', {todo: todo})
   })
-
 })
 
 app.get('/todos/:id/edit', ( req,res ) => {
-  res.send('修改這個todo')
+  Todo.findById(req.params.id, (err, todo) => {
+    if (err) return console.log(err)
+    return res.render('edit', {todo: todo})
+  })
 })
 
 app.post('/todos/:id', ( req,res ) => {
-  res.send('修改todo')
+  Todo.findById(req.params.id, (err, todo) => {
+    if (err) return console.log(err)
+    todo.name = req.body.name
+    todo.save((err) => {
+      if (err) return console.log(err)
+      return res.redirect(`/todos/${req.params.id}`)
+    })
+
+  })
 })
 
 app.post('/todos/:id/delete', ( req,res ) => {
