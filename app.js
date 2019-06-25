@@ -13,6 +13,7 @@ app.use(methodOverride('_method'))
 
 app.use('/', require('./routes/home'))
 app.use('/todos', require('./routes/todos'))
+app.use('/users', require('./routes/users'))
 
 mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true })
 
