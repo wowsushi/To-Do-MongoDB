@@ -10,6 +10,8 @@ const port = 3000
 
 app.use(session({
   secret: 'dijwfjsogioiswg',
+  resave: 'false',
+  saveUninitialized: 'false'
 }))
 
 app.use(passport.initialize())
@@ -28,7 +30,7 @@ app.engine('handlebars', exphbs({ defaultLayouts: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/todo', { useNewUrlParser: true, useCreateIndex: true })
 
 const db = mongoose.connection
 
