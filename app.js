@@ -8,6 +8,10 @@ const session = require('express-session')
 const passport = require('passport')
 const port = 3000
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 app.use(session({
   secret: 'dijwfjsogioiswg',
   resave: 'false',
@@ -47,5 +51,6 @@ const Todo = require('./models/todo')
 app.use('/', require('./routes/home'))
 app.use('/todos', require('./routes/todos'))
 app.use('/users', require('./routes/users'))
+app.use('/auth', require('./routes/auths'))
 
 app.listen(port, console.log('running'))
